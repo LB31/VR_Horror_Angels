@@ -17,7 +17,7 @@ public class AngelController : MonoBehaviour {
         
     }
     void Update() {
-        agent.destination = goal.position;
+        
         //Vector3 screenPoint = Camera.main.WorldToViewportPoint(transform.position);
         //bool onScreen = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 
         //    && screenPoint.y > 0 && screenPoint.y < 1;
@@ -26,8 +26,14 @@ public class AngelController : MonoBehaviour {
         //else print("Not on screen");
 
         // IsVisibleFrom is a method from the RendererExtensions.cs script
-        if (renderer.IsVisibleFrom(Camera.main)) Debug.Log("Visible");
-        else Debug.Log("Not visible");
+        if (renderer.IsVisibleFrom(Camera.main)) {
+            Debug.Log("Visible");
+            agent.enabled = false;
+        } else {
+            Debug.Log("Not visible");
+            agent.enabled = true;
+            agent.destination = goal.position;
+        }
     }
 
 
