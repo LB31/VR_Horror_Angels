@@ -6,18 +6,18 @@ public class PlayerTest : MonoBehaviour {
     public float speed, rotationSpeed;
     public Rigidbody rb;
 
-	// Use this for initialization
 	void Start () {
         rb = GetComponent<Rigidbody>();
     }
 	
-	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
         Movement();
 	}
 
     void Movement(){
-        float translation = Input.GetAxis("Vertical") * speed;
-        float rotation = Input.GetAxis("Horizontal") * rotationSpeed;
+        var x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
+        var z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
+
+        transform.Translate(x, 0, z);
     }
 }
