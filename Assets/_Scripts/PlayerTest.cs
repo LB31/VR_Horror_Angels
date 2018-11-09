@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerTest : MonoBehaviour {
-    public float speed, rotationSpeed;
-    public Rigidbody rb;
+    public float speed = 6.0f;
+    public float jumpSpeed = 8.0f;
+    public float gravity = 20.0f;
 
-	void Start () {
-        rb = GetComponent<Rigidbody>();
+    private Vector3 moveDirection = Vector3.zero;
+    private CharacterController controller;
+
+    void Start () {
+        controller = GetComponent<CharacterController>();
     }
 	
 	void FixedUpdate () {
@@ -15,9 +19,21 @@ public class PlayerTest : MonoBehaviour {
 	}
 
     void Movement(){
-        var x = Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-        var z = Input.GetAxis("Vertical") * Time.deltaTime * speed;
 
-        transform.Translate(x, 0, z);
+        if (controller.isGrounded) {
+            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+            moveDirection = Camera.main.transform.TransformDirection(moveDirection);
+            moveDirection = moveDirection * speed;
+
+            if (Input.GetButton("Jump")) {
+                moveDirection.y = jumpSpeed;
+            }
+        }
+
+        // Apply gravity
+        moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
+
+        // Move the controller
+        controller.Move(moveDirection * Time.deltaTime);
     }
 }
