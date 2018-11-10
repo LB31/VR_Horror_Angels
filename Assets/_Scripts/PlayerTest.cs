@@ -10,6 +10,9 @@ public class PlayerTest : MonoBehaviour {
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController controller;
 
+    public float yaw = 0.0f;
+    public float pitch = 0.0f;
+
     void Start () {
         controller = GetComponent<CharacterController>();
     }
@@ -29,6 +32,11 @@ public class PlayerTest : MonoBehaviour {
                 moveDirection.y = jumpSpeed;
             }
         }
+
+        yaw += speed * Input.GetAxis("Mouse X");
+        pitch -= speed * Input.GetAxis("Mouse Y");
+
+        transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
 
         // Apply gravity
         moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
