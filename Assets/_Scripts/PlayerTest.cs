@@ -17,7 +17,7 @@ public class PlayerTest : MonoBehaviour {
         controller = GetComponent<CharacterController>();
     }
 	
-	void FixedUpdate () {
+	void Update () {
         Movement();
 	}
 
@@ -33,10 +33,11 @@ public class PlayerTest : MonoBehaviour {
             }
         }
 
+#if UNITY_EDITOR
         yaw += speed * Input.GetAxis("Mouse X");
         pitch -= speed * Input.GetAxis("Mouse Y");
-
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
+#endif
 
         // Apply gravity
         moveDirection.y = moveDirection.y - (gravity * Time.deltaTime);
