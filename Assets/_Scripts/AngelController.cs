@@ -18,13 +18,6 @@ public class AngelController : MonoBehaviour {
     }
     void Update() {
         
-        //Vector3 screenPoint = Camera.main.WorldToViewportPoint(transform.position);
-        //bool onScreen = screenPoint.z > 0 && screenPoint.x > 0 && screenPoint.x < 1 
-        //    && screenPoint.y > 0 && screenPoint.y < 1;
-        //print(screenPoint.y);
-        //if (onScreen) print("On screen");
-        //else print("Not on screen");
-
         // IsVisibleFrom is a method from the RendererExtensions.cs script
         if (renderer.IsVisibleFrom(Camera.main)) {
             Debug.Log("Visible");
