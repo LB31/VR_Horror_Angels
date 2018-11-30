@@ -16,12 +16,14 @@ public class PlayerController : MonoBehaviour
     public float yaw = 0.0f;
     public float pitch = 0.0f;
 
+    private GameManager GameManager;
     private HealthBarController HealthBar;
 
 
     void Start() {
         controller = GetComponent<CharacterController>();
         HealthBar = FindObjectOfType<HealthBarController>();
+        GameManager = FindObjectOfType<GameManager>();
     }
 
     void Update() {
@@ -44,9 +46,10 @@ public class PlayerController : MonoBehaviour
 
 
     private void OnTriggerEnter(Collider other) {
-        print("bam");
+        float damage = 10;
         if (other.gameObject.CompareTag("Angel")) {
-            HealthBar.DecreaseLife(10);
+            HealthBar.DecreaseLife(damage);
+            GameManager.PlayerLife -= damage;
 
         }
     }
