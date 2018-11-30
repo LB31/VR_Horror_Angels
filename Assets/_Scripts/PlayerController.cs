@@ -16,8 +16,12 @@ public class PlayerController : MonoBehaviour
     public float yaw = 0.0f;
     public float pitch = 0.0f;
 
+    private HealthBarController HealthBar;
+
+
     void Start() {
         controller = GetComponent<CharacterController>();
+        HealthBar = FindObjectOfType<HealthBarController>();
     }
 
     void Update() {
@@ -28,14 +32,23 @@ public class PlayerController : MonoBehaviour
 
 
     private void OnTriggerStay(Collider other) {
-    if (Input.GetKey("e")) {
-        foreach (GameObject item in collectableItems) {
-            if (other.gameObject == item) {
-                collectedItems.Add(other.name);
-                Destroy(other.gameObject);
+        if (Input.GetKey("e")) {
+            foreach (GameObject item in collectableItems) {
+                if (other.gameObject == item) {
+                    collectedItems.Add(other.name);
+                    Destroy(other.gameObject);
+                }
             }
         }
     }
+
+
+    private void OnTriggerEnter(Collider other) {
+        print("bam");
+        if (other.gameObject.CompareTag("Angel")) {
+            HealthBar.DecreaseLife(10);
+
+        }
     }
 
 
