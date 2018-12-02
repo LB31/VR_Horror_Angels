@@ -26,9 +26,8 @@ public class PlayerController : MonoBehaviour
         GameManager = FindObjectOfType<GameManager>();
     }
 
-    void Update() {
+    void FixedUpdate() {
         Movement();
-
     }
 
 
