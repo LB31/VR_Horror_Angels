@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour
 #if UNITY_EDITOR
         yaw += speed * Input.GetAxis("Mouse X");
         pitch -= speed * Input.GetAxis("Mouse Y");
+        //yaw += speed * Input.GetAxis("PadRightX");
+        //pitch -= speed * Input.GetAxis("PadRightY");
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
 #endif
 
