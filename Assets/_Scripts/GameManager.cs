@@ -7,16 +7,37 @@ public class GameManager : MonoBehaviour {
 
     public GameObject AllAngelEnemies;
 
+    public GameObject PauseUI;
+
+    public bool pauseGame;
+
 
 	// Use this for initialization
 	void Start () {
         // Deactivates the enemies for the tutorials
         AllAngelEnemies.SetActive(false);
+        // Starts the game in the menu
+        PauseGame(true);
 
     }
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (Input.GetButtonDown("Fire3") || Input.GetKeyDown("p")) {
+            PauseGame(pauseGame);
+            PauseUI.SetActive(pauseGame);
+            pauseGame = !pauseGame;
+        }
+    }
+
+
+    public void PauseGame(bool pause) {
+        int stop = 0;
+        if (pause)
+            stop = 0;
+        else
+            stop = 1;
+
+        Time.timeScale = stop;
+    }
 }
