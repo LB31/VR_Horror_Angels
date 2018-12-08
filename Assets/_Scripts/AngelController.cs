@@ -14,7 +14,7 @@ public class AngelController : MonoBehaviour {
     public Transform goal;
     private NavMeshAgent agent;
 
-    private bool AngelFound;
+    public bool AngelFound;
 
     private void Start() {
         goal = FindObjectOfType<PlayerController>().transform;
@@ -46,20 +46,14 @@ public class AngelController : MonoBehaviour {
     }
 
     void ChangeAngelVisibility(bool toAttack, bool hideAll) {
-        if(toAttack) {
-            // 0 is idle
-            AngelModels.transform.GetChild(0).gameObject.SetActive(!toAttack);
-            // 1 is attacking
-            AngelModels.transform.GetChild(1).gameObject.SetActive(toAttack);
+        if (hideAll) {
+            AngelModels.transform.GetChild(0).gameObject.SetActive(false);
+            AngelModels.transform.GetChild(1).gameObject.SetActive(false);
         } else {
             // 0 is idle
             AngelModels.transform.GetChild(0).gameObject.SetActive(!toAttack);
             // 1 is attacking
             AngelModels.transform.GetChild(1).gameObject.SetActive(toAttack);
-        }
-        if (hideAll) {
-            AngelModels.transform.GetChild(0).gameObject.SetActive(false);
-            AngelModels.transform.GetChild(1).gameObject.SetActive(false);
         }
     }
 

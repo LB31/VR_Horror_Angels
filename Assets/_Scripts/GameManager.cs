@@ -21,9 +21,10 @@ public class GameManager : MonoBehaviour {
 
     }
 	
-	// Update is called once per frame
+
 	void Update () {
-        if (Input.GetButtonDown("Fire3") || Input.GetKeyDown("p")) {
+        // Pauses or resumes the game, when specific button is pushed
+        if (Input.GetButtonDown("Fire3") || Input.GetKeyDown("o")) {
             PauseGame(pauseGame);
             PauseUI.SetActive(pauseGame);
             pauseGame = !pauseGame;

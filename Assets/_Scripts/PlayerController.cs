@@ -19,11 +19,21 @@ public class PlayerController : MonoBehaviour
     private GameManager GameManager;
     private HealthBarController HealthBar;
 
+    private bool ControllerConnected;
+
 
     void Start() {
         controller = GetComponent<CharacterController>();
         HealthBar = FindObjectOfType<HealthBarController>();
         GameManager = FindObjectOfType<GameManager>();
+
+        CheckIfControllerConnected();
+    }
+
+    void CheckIfControllerConnected() {
+        string[] names = Input.GetJoystickNames();
+        if (names[0] != "")
+            ControllerConnected = true;
     }
 
     void FixedUpdate() {
@@ -67,10 +77,16 @@ public class PlayerController : MonoBehaviour
         }
 
 #if UNITY_EDITOR
-        yaw += speed * Input.GetAxis("Mouse X");
-        pitch -= speed * Input.GetAxis("Mouse Y");
-        //yaw += speed * Input.GetAxis("PadRightX");
-        //pitch -= speed * Input.GetAxis("PadRightY");
+        if (ControllerConnected) {
+            yaw += speed * Input.GetAxis("Horizontal2");
+            pitch -= speed * Input.GetAxis("Vertical2");
+        } else {
+            yaw += speed * Input.GetAxis("Mouse X");
+            pitch -= speed * Input.GetAxis("Mouse Y");
+        }
+
+
+
         transform.eulerAngles = new Vector3(pitch, yaw, 0.0f);
 #endif
 
