@@ -41,9 +41,9 @@ public class PlayerController : MonoBehaviour
     }
 
 
-
+    // Responsible for picking up items
     private void OnTriggerStay(Collider other) {
-        if (Input.GetKey("e")) {
+        if (Input.GetButtonDown("Fire2") || Input.GetKeyDown("x")) {
             foreach (GameObject item in collectableItems) {
                 if (other.gameObject == item) {
                     collectedItems.Add(other.name);
@@ -54,9 +54,11 @@ public class PlayerController : MonoBehaviour
     }
 
 
+    // Responsible for the player's life
     private void OnTriggerEnter(Collider other) {
         float damage = 10;
-        if (other.gameObject.CompareTag("Angel")) {
+        // When an invisible angel has crashed the player
+        if (other.gameObject.CompareTag("Angel") && !other.GetComponent<AngelController>().AngelFound) {
             HealthBar.DecreaseLife(damage);
             GameManager.PlayerLife -= damage;
 

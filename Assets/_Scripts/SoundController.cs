@@ -6,24 +6,32 @@ public class SoundController : MonoBehaviour {
     public AudioSource Audio;
     public AudioClip[] AudioTracks;
 
-    private AngelController angelController;
+    public AngelController angelController;
 
     private float t;
-    private float timeToRepeat = 5;
+    public float timeToRepeat = 5;
 
     // Use this for initialization
     void Start () {
-        angelController = GetComponent<AngelController>();
+     
     }
 	
 	// Update is called once per frame
 	void Update () {
         t += Time.deltaTime;
-        if(t > timeToRepeat && !angelController.AngelFound) {
+        if(t > timeToRepeat) {
             t = 0;
-            int randomNumber = (int)Random.Range(0f, 6f);
-            Audio.clip = AudioTracks[randomNumber];
-            Audio.Play();
+            int randomNumber = (int)Random.Range(0f, AudioTracks.Length - 1);
+            if (angelController != null && !angelController.AngelFound) {
+                Audio.clip = AudioTracks[randomNumber];
+                Audio.Play();
+            }
+            if(angelController == null) {
+                Audio.clip = AudioTracks[randomNumber];
+                Audio.Play();
+            }
+
+ 
         }
 	}
 }
