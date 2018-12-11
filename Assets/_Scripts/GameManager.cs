@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour {
 
     public GameObject DeadScreen;
 
+    public GameObject TARDIS;
+
     private bool pauseGame;
 
     private float t;

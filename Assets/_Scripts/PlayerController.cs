@@ -54,6 +54,10 @@ public class PlayerController : MonoBehaviour
             if(other.GetComponent<DoorController>() != null && collectedItems.Contains("key")) {
                 other.GetComponent<DoorController>().OpenDoor();
             }
+
+            if(collectedItems.Contains("screwdriver") && collectedItems.Contains("stereoglass")) {
+                GameManager.TARDIS.SetActive(true);
+            }
         }
     }
 
@@ -65,7 +69,6 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Angel") && !other.GetComponent<AngelController>().AngelFound) {
             HealthBar.DecreaseLife(damage);
             GameManager.PlayerLife -= damage;
-
         }
     }
 
