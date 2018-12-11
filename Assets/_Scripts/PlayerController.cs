@@ -88,7 +88,7 @@ public class PlayerController : MonoBehaviour
             //}
         }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE
         float newSpeed = speed * 1.5f; 
         if (ControllerConnected) {
             yaw += newSpeed * Input.GetAxis("Horizontal2");
