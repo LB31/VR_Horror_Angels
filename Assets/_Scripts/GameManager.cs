@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,15 +14,16 @@ public class GameManager : MonoBehaviour {
     public GameObject DeadScreen;
 
     public GameObject TARDIS;
+    public Transform PlayerTeleport;
 
     private bool pauseGame;
 
     private float t;
 
+    public GameObject[] allTexts;
 
-	// Use this for initialization
-	void Start () {
-
+    // Use this for initialization
+    void Start () {
         // Deactivates the enemies for the tutorials
         AllAngelEnemies.SetActive(false);
         // Starts the game in the menu
@@ -29,6 +31,7 @@ public class GameManager : MonoBehaviour {
 
     }
 	
+ 
 
 	void Update () {
         // Pauses or resumes the game, when specific button is pushed

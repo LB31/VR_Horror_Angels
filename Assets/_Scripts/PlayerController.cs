@@ -57,6 +57,8 @@ public class PlayerController : MonoBehaviour
 
             if(collectedItems.Contains("screwdriver") && collectedItems.Contains("stereoglass")) {
                 GameManager.TARDIS.SetActive(true);
+                GameManager.AllAngelEnemies.SetActive(false);
+                transform.position = GameManager.PlayerTeleport.position;
             }
         }
     }
@@ -69,6 +71,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Angel") && !other.GetComponent<AngelController>().AngelFound) {
             HealthBar.DecreaseLife(damage);
             GameManager.PlayerLife -= damage;
+            
         }
     }
 
@@ -86,12 +89,13 @@ public class PlayerController : MonoBehaviour
         }
 
 #if UNITY_EDITOR
+        float newSpeed = speed * 1.5f; 
         if (ControllerConnected) {
-            yaw += speed * Input.GetAxis("Horizontal2");
-            pitch -= speed * Input.GetAxis("Vertical2");
+            yaw += newSpeed * Input.GetAxis("Horizontal2");
+            pitch -= newSpeed * Input.GetAxis("Vertical2");
         } else {
-            yaw += speed * Input.GetAxis("Mouse X");
-            pitch -= speed * Input.GetAxis("Mouse Y");
+            yaw += newSpeed * Input.GetAxis("Mouse X");
+            pitch -= newSpeed * Input.GetAxis("Mouse Y");
         }
 
 
