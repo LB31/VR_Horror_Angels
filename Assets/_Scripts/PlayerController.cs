@@ -50,6 +50,10 @@ public class PlayerController : MonoBehaviour
                     Destroy(other.gameObject);
                 }
             }
+            // When you have found the door in this case
+            if(other.GetComponent<DoorController>() != null && collectedItems.Contains("key")) {
+                other.GetComponent<DoorController>().OpenDoor();
+            }
         }
     }
 
