@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class DoorController : MonoBehaviour {
     private GameObject InformationText;
-	// Use this for initialization
+    public GameObject TutorialAngel;
+
 	void Awake () {
         InformationText = GetComponentInChildren<TextMeshProUGUI>().gameObject;
         InformationText.SetActive(false);
@@ -22,6 +23,7 @@ public class DoorController : MonoBehaviour {
     public void OpenDoor() {
         GetComponent<Animator>().enabled = true;
         Destroy(InformationText);
+        Destroy(TutorialAngel);
         GetComponent<BoxCollider>().enabled = false;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public float PlayerLife = 100;
@@ -9,11 +10,16 @@ public class GameManager : MonoBehaviour {
 
     public GameObject PauseUI;
 
-    public bool pauseGame;
+    public GameObject DeadScreen;
+
+    private bool pauseGame;
+
+    private float t;
 
 
 	// Use this for initialization
 	void Start () {
+
         // Deactivates the enemies for the tutorials
         AllAngelEnemies.SetActive(false);
         // Starts the game in the menu
@@ -29,6 +35,16 @@ public class GameManager : MonoBehaviour {
             PauseUI.SetActive(pauseGame);
             pauseGame = !pauseGame;
         }
+
+        if(PlayerLife <= 0) {
+            DeadScreen.SetActive(true);
+            AllAngelEnemies.SetActive(false);
+            t += Time.deltaTime;
+        }
+
+        if(t >= 5) {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
 
@@ -41,4 +57,11 @@ public class GameManager : MonoBehaviour {
 
         Time.timeScale = stop;
     }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other.gameObject.CompareTag("Player")) {
+            AllAngelEnemies.SetActive(true);
+        }
+    }
+
 }
