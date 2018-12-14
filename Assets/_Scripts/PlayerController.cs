@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
 
     private bool ControllerConnected;
 
+    public string[] names;
 
     void Start() {
         controller = GetComponent<CharacterController>();
@@ -31,8 +32,8 @@ public class PlayerController : MonoBehaviour
     }
 
     void CheckIfControllerConnected() {
-        string[] names = Input.GetJoystickNames();
-        if (names == null || names.Length == 0)
+        names = Input.GetJoystickNames();
+        if (names.Length != 0)
             ControllerConnected = true;
     }
 
