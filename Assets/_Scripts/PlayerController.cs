@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
 
     void CheckIfControllerConnected() {
         string[] names = Input.GetJoystickNames();
-        if (names[0] != "")
+        if (names == null || names.Length == 0)
             ControllerConnected = true;
     }
 
